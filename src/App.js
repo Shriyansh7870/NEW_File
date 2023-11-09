@@ -1,7 +1,14 @@
 import React from "react";
+import "./App.css";
+import "./Responsive/ResponsiveNav.css";
+import Navbar from "./Navbar/Navbar";
 
 const App = () => {
-  return <div>Welcome to Thapa React E-Commerce Website</div>;
+  return (
+    <div>
+      <Navbar></Navbar>
+    </div>
+  );
 };
 
 export default App;
