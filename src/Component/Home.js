@@ -9,7 +9,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/datafind")
+      .get("http://localhost:4000/api/datafind2")
       .then((res) => {
         setData(res.data);
       })
@@ -75,7 +75,7 @@ function Home() {
         <div className="Home_best_seller">Best Seller Product</div>
         <div className="Homeconatiner1">
           {data
-            .filter((item) => item.id >= 40 && item.id <= 45)
+            .filter((item) => item.id % 12 === 0)
             .map((item, index) => {
               return (
                 <Link to={`/single/${item.id}`} key={index}>
@@ -86,8 +86,8 @@ function Home() {
                         src={item.image}
                         alt="Not Found"
                       />
-                      <div className="modelName"> {item.model}</div>
-                      <div className="Price-of-All">{item.price}</div>
+                      <div className="HomemodelName"> {item.model}</div>
+                      <div className="LaptopPrice-of-All">{item.price}</div>
                       <button className="buttonforAll">
                         Add Cart
                         <i class="fa-solid fa-cart-shopping"></i>
@@ -161,37 +161,32 @@ function Home() {
               <i className="fa-solid imageOne  fa-truck-fast"></i>
             </div>
             <h3> Free Shipping </h3>
-            <h4>
+            <p>
               Welcome to our online store, where shopping just got even more
               rewarding! We're excited to introduce our exclusive Free Shipping
-              offer, designed to make your shopping experience truly delightful.
-            </h4>
+              offer.
+            </p>
           </div>
           <div className="secondsipping">
             <div>
               <i className="fa-solid imageOne  fa-arrows-rotate"></i>
             </div>
             <h3>100% REFUND</h3>
-            <h4>
-              Our 100% Refund Guarantee: Your Peace of Mind, Our Promise.At
-              [Treat yo'self], your satisfaction is our top priority. We
-              understand that sometimes things may not go as planned, and that's
-              why we're proud to offer a 100% Refund Guarantee. With this
-              assurance.
-            </h4>
+            <p>
+              Our 100% Refund Guarantee: Your Peace of Mind, Our Promise.At [Woo
+              Treat], your satisfaction is our top priority.
+            </p>
           </div>
           <div className="thirdsipping">
             <div>
               <i className="fa-solid imageOne  fa-headset"></i>
             </div>
             <h3>SUPPORT 24/7</h3>
-            <h4>
-              At [Treat yo'self], your satisfaction is our priority, and that's
-              why we're thrilled to offer 24/7 support. We understand that your
-              needs don't follow a schedule, and neither do we. With our
-              always-on support, you can shop, inquire, and resolve issues
-              whenever it's convenient for you.
-            </h4>
+            <p>
+              At [Woo Treat], your satisfaction is our priority, and that's why
+              we're thrilled to offer 24/7 support. We understand that your
+              needs don't follow a schedule, and neither do we.
+            </p>
           </div>
         </div>
       </div>

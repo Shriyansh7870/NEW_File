@@ -10,7 +10,7 @@ function Single() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/datafind")
+      .get("http://localhost:4000/api/datafind2")
       .then((res) => setMobileData(res.data))
       .catch((err) => console.log(err));
   }, [id]);

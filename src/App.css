@@ -1,62 +1,175 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
 *{
-  padding: 0;
   margin: 0;
+  padding: 0;
+  outline: none;
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
   text-decoration: none;
+  list-style-type: none;
 }
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background: #f2f2f2;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+.App {
+  text-align: center;
+}
+body{
+  margin: 0;
+  padding:0;
+  box-sizing: border-box;
+}
+ul li{
+  list-style-type:none;
+}
 
-.navbar {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 0;
-  height: 6vh;
+.navbar{
+  display:flex;
+  justify-content: space-between;
+  background-color:#459af4;
+}
+.navlink{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  width:56vw;
+  color:black;
+  
+}
+.navlink li{
+  position: relative;
+}
+.submenu{
+  position: absolute;
+  background-color: rgba(0, 255, 166, 0.315);
+  width:10vw;
+  left:0;
+  display:none;
+  z-index: 1;
+}
+.submenu2{
+  position: absolute;
+  left: 100%;
+  width:10vw;
+  top:0;
+  background-color: rgba(0, 255, 166, 0.315);
+  display:none;
 }
 
-.navbar ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap:2vw;
+.navlink li:hover > .submenu{
+display:block;
 }
 
-.navbar li {
-  font-size: 1.2vw;
-}
+.submenu li:hover > .submenu2{
+  display:block;
+  }
 
-.navbar a {
-  text-decoration: none;
-  color: #fff;
+  .submenu  li:hover{
+    background-color: black;
+  }
+
+  .submenu2 ul li:hover{
+    background-color: black;
+  }
+
+.title{
+  width:10vw;
+  color: rgb(171, 50, 50);
 }
 .searchbar{
+  height:4vh;
+  width:11vw;
+outline: none;
+border: none;
+
+  
+}
+.whole-searchbar{
+  border:2px solid black;
+  background-color: white;
+
+}
+
+.logosearchbar{
+  outline: none;
+  background-color: white;
+  border:none;
+  align-items: center;
+  font-size: 15px;
+}
+.navlink-names{
+  font-size: 25px;
+  text-decoration: none;
+  font-weight: 700;
+  color:white;
+  font-style: italic;
+  
+}
+.navlink-names:hover{
+color: grey;
+}
+.searchbar-logo{
   display: flex;
-  justify-content: center;
-  align-items: baseline;
+  width:27vw;
+  justify-content: space-around;
+  align-items: center;
+  color:white;
 }
-.serachinput{
-  width: 10vw;
-  padding: 0.3vw;
-  outline: none;
-  border: none;
-  background-color: beige;
+.logo{
+  display: flex;
+  justify-content: space-around;
+  width:10vw;
 }
-.button-search{
-  width: 3vw;
-  padding: 0.3vw;
-  background-color: beige;
-  border: none;
-  outline: none;
+.fa-cart-shopping{
+  font-size: 25px;
 }
+.fa-user{
+  font-size: 25px;
+  color: rgb(243, 47, 47);
+}
+
+
+.fa-heart{
+  font-size: 25px;
+}
+
+.slider {
+  height: 70vh;
+
+}
+
+
+
+.container{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* border: 2px solid red; */
+  margin-top: 20px;
+  padding:10px;
+
+}
+.cards{
+  height:32vh;
+  margin-top: 20px;
+  width:23vw;
+  border: 1px solid black;
+}
+
+/* Subroutes */
+.show{
+  display:block;
+}
+.hide{
+ display:none;
+}
+/**********************************************NavbarEnd************************************/
 .maincontainer{
   display: flex;
   justify-content: space-between;
@@ -71,14 +184,41 @@ body {
   gap: 4vw;
   margin: 0 auto;
   text-align: center;
-
-
 }
-
+.LaptopConatiner{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px; 
+}
+.LaptopContainer2{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4vw;
+  margin: 0 auto;
+  text-align: center;
+}
+.LaptopmodelName{
+  margin-top: 47px;
+  line-height: 3vh;
+  font-size: 24px;
+  font-style: italic;
+}
+.LaptopPrice-of-All{
+  font-size: 24px;
+}
+.HomemodelName{
+  margin-top: 27px;
+  line-height: 3vh;
+  font-size: 24px;
+  font-style: italic;
+}
 .child_conatiner{
   padding: 1vh;
   width: 20vw;
-  height: 55vh;
+  height: 52vh;
   border-radius: 12px;
   box-shadow: 5px 5px 5px 5px  grey;
 
@@ -86,13 +226,13 @@ body {
 /* .child_conatiner:hover{
    width:16vw ;
 } */
-.sidediv{
+ /* .sidediv{
   margin-top: 15vh;
   width: 18%;
   height: 70vh;
-  border: 2px solid yellow;
+ 
   
-}
+}  */
 .Main_image{
   width:90%;
   height: 14vh;
@@ -115,8 +255,8 @@ body {
 .mobile_sub {
   display: none;
   position: absolute;
-  background-color: blueviolet; /* Change this to your desired background color */
-  border: 1px solid #ccc; /* Add any desired styling for the submenu */
+  background-color: blueviolet; 
+  border: 1px solid #ccc; 
   padding: 10px;
   z-index: 1;
   flex-direction: column; /* Ensure the submenu appears above other content */
@@ -136,14 +276,18 @@ display:none;
 }
 /*******************************Sidediv***************************/
 .sidediv{
-  background-color: lightgray;
   display: flex;
   flex-direction: column;
   text-decoration: none;
   align-items: center;
-  font-size: 2.5vw;
-  gap:20px;
+  height: auto;
+  width: 20%;
+  font-size: 2vw;
+  gap:10px;
   padding: 20px 0px;
+  border: 2px solid red;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: italic;
 }
 .sidebarLink{
   color: black;
@@ -156,34 +300,34 @@ height: 38vh;
 /*****************************Laptop**************************/
 .Laptop_image{
   margin: 4px;
-  width: 18vw;
-  height: 32vh;
+  width: 17vw;
+  height: 27vh;
   border-radius: 10px;
 }
 .laptop_div{
   width: 80%;
-  height: 35vh;
+  height: 23vh;
 }
 
 /**********************************Clothes************************/
 .Clothes_image{
   margin: 4px 4px;
   width: 80%;
-  height: 32vh;
+  height: 27vh;
   border-radius: 10px;
 }
 /**************************************Electronic******************/
 .Electronic_image{
   margin: 4px 4px;
   width: 80%;
-  height: 32vh;
+  height: 28vh;
   border-radius: 10px; 
 }
 /*******************************Mobile****************************/
 .Mobile_image{
   margin: 4px 4px;
   width: 80%;
-  height: 32vh;
+  height: 28vh;
   border-radius: 10px; 
 }
 /*********************************Home***************************/
@@ -191,7 +335,6 @@ height: 38vh;
   display: flex;
   width: 100%;
   height: 40vh;
-  /* border: 2px solid black; */
 }
 .Home_product{
   width: 100%;
@@ -202,76 +345,73 @@ height: 38vh;
   justify-content: center;
   font-size: 3vw;
   font-style: italic;
-  margin: 2vw;
   text-shadow: 2px 2px 8px #FF0000;
 
 }
 .Homeconatiner1 {
-  width: 80%;
+  width: 100%;
   height: auto;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 8vh;
-  margin: 0 auto; 
-  
 }
-.HomeChild{
-  width:22vw;
+
+.HomeChild {
+  width: 22vw;
   height: 50vh;
   display: flex;
   justify-content: center;
   text-align: center;
-  border-radius:15px;
+  border-radius: 15px;
 }
-.Home_image{
+
+.Home_image {
   padding: 1vh;
   width: 18vw;
   height: 36vh;
   border-radius: 8px;
-  box-shadow: 5px 5px 5px 5px  grey;
+  box-shadow: 5px 5px 5px 5px grey;
 }
-.homeConatiner{
- height: auto;
-  /* border: 4px solid black; */
-  margin-top: 10px;
-  box-sizing: border-box;
+
+.homeConatiner {
+  height: auto;
   border-radius: 10px;
-  
 }
-.modelName{
-  line-height: 7vh;
+
+.modelName {
+  margin-top: 10px;
+  line-height: 3vh;
   font-size: 24px;
   font-style: italic;
 }
-.buttonforAll{
+
+.buttonforAll {
   font-size: 22px;
   text-decoration: none;
   padding: 0.5vh;
-  color:white;
-  background-color:blue;
+  color: white;
+  background-color: blue;
   border-radius: 4px;
   margin-top: 1vh;
 }
-.Price-of-All{
-  font-size: 22px;
-}
 .AdvertismentforHome{
+margin-top: 14vh;
   width:99%;
   height: 45vh;
-  margin: 15vh 4px;
+  /* margin: 15vh 4px; */
 }
-.sipping{
-  margin-top: -4vh;
+.sipping {
+  border: 2px solid orange;
   display: flex;
   flex-direction: row;
-  width: 80%;
-  margin-left: 15vw;
-  justify-content:space-between;
+  justify-content: space-between;
   text-align: center;
-  
-
+  margin: auto; 
+  align-items: center; 
+  width: 80%;
 }
+
 .firstsipping{
  
   width: 20vw;
@@ -297,75 +437,110 @@ color: orange;
 h4{
   margin-top: 3vh; 
 }
+
 /**********************************LOginSignup************************************************/
-.center1 {
+ .center1 {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background: #f5f5f5;
+  height: auto;
+  width: 50%; 
+  margin: auto; 
 }
 
 #heading {
-  text-align: center;
-  padding: 0 0 20px 0;
-  border-bottom: 1px solid silver;
+  font-size: 2rem;
 }
 
 #font {
-  font-size: 18px;
+  font-size: 1rem;
 }
 
-.text2, .text3, .text4 {
-  box-shadow: 2px solid #adadad;
-  margin: 10px 0;
-  height: 30px;
-  width: 200px;
-  padding: 5px;
+.text2,
+.text3,
+.text4 {
+  width: 50%;
+  padding: 4px;
+  margin-bottom: 10px;
 }
 
 .button1 {
-  text-align: center;
-  width: 150px;
-  height: 40px;
-  font-size: 20px;
-  margin-top: 10px;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .or1 {
-  text-align: center;
-  font-size: 24px;
-  margin-top: 15px;
-  color: blue;
+  margin: 15px 0;
 }
 
 .nextpage1 {
-  text-align: center;
   text-decoration: none;
-  font-size: 20px;
-  margin-top: 20px;
+  color: #4caf50;
+  font-weight: bold;
 }
 
+/* Add your responsive styles here */
+@media (max-width: 600px) {
+  .center1 {
+    width: 80%; 
+  }
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  justify-content: center;
+  height: 50vh;
+}
+
+#heading {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.word {
+  font-size: 1rem;
+}
+
+.text,
+.text1 {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.or {
+  margin: 15px 0;
+}
+
+.nextpage {
+  text-decoration: none;
+  color: #4caf50;
+  font-weight: bold;
+}
+@media (max-width: 600px) {
+  .center {
+    height: 70vh; 
+  }
+}
 
 /*************************************singlePageConatiner****************************************/
-/* .singlePageConatiner{
-  display: flex;
-  border:2px solid black;
-  width: 98vw;
-  height: 50vh;
-  justify-content: center;
-  margin-top: 20vh;
-}
-.textCotainer{
-
-  border: 2px solid red;
-}
-.page_single_image{
-  width: 30vw;
-  height: 45vh;
-  border-radius: 10px;
-} */
 .SingleParentConatiner {
   display: flex;
   align-items: center;
@@ -404,31 +579,47 @@ li {
 
 /**********************************footer***************************/
 .footer {
-  background-color: #333;
+  background-color: #0e0e86;
   color: white;
   padding: 30px 0;
-  margin-top: 17vh;
+  margin-top: 4vh;
+
 }
 .footer-content {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  color: #f2f2f2;
 }
 .footer-section {
   flex: 1;
   text-align: center;
+  color: #f2f2f2;
+
+}
+.footertext{
+  font-size: 25px;
+  color: white;
+  text-decoration: none;
 }
 .footer-section p {
   margin: 10px 0;
+  color: #f2f2f2;
 }
 
 .footer-section h2 {
   font-size: 1.2rem;
+  color: #f2f2f2;
 }
 .companyName{
   display: flex;
   justify-content: center;
   margin-top: 2vh;
 }
+/* .CompanyNameFooter{
+ margin-top: 4vh;
+} */
+
+
 @media (max-width: 668px) {
   .footer-content {
     flex-direction: column;
@@ -471,9 +662,42 @@ p {
 
 /***************************************Responsive*****************************/
 @media screen and (min-width:300px )and (max-width:667px) {
-  /* .homeConatiner{
-    border: 4px solid black;
-  } */
+  *{
+    box-sizing: border-box;
+  }
+  .sidediv{
+    display: none;
+  }
+  .HomeChild {
+    width: 95%; 
+    height: auto; 
+  }
+  .child_conatiner{
+    flex-direction: row;
+    width: 98%;
+    gap:2vh;
+    height: 52vh;
+  }
+  .Laptop_image{
+    width: 99%;
+  }
+.conatiner{
+  flex-direction: column;
+  gap:4vh;
+}
+  .Home_image {
+    width: 95%; 
+    height: auto; 
+  }
+  .buttonforAll {
+    font-size: 18px; 
+    padding: 0.3vh 1vh; 
+    margin-top: 0.5vh;
+    margin-right: 90px;
+  }
+  .Price-of-All{
+    font-size: 24px;
+  }
     .sipping{
       flex-direction: column;
       gap:5vh;
@@ -514,8 +738,9 @@ p {
                     
   
 }
-
-
+@media screen and (min-width:300px )and (max-width:667px){
+  
+}
 
 
 
