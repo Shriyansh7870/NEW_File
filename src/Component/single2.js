@@ -19,7 +19,7 @@ function Single2() {
   return (
     <div>
       {mobileData
-        .filter((item) => item.id == id)
+        .filter((item) => item.id === id)
         .map((item, index) => {
           return (
             <div className="SingleParentConatiner">
