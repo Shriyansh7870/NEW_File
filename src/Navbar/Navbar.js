@@ -22,7 +22,7 @@ import Single3 from "../Component/single3";
 import Single2 from "../Component/single2";
 import Single from "../Dynamic/Single";
 import Single1 from "../Component/single1";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 

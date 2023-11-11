@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 
 function Single2() {
   const { id } = useParams();
-  const newid = parseInt(id);
-  console.log(newid);
+  // const newid = parseInt(id);
+  console.log(id);
   const [mobileData, setMobileData] = useState([]);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function Single2() {
   return (
     <div>
       {mobileData
-        .filter((item) => item.id == newid)
+        .filter((item) => item.id == id)
         .map((item, index) => {
           return (
             <div className="SingleParentConatiner">
