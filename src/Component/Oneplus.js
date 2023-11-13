@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const OnePlus = () => {
   const [data, setData] = useState([]);
+  const [slicedata, setSliceData] = useState(8);
+  const handleLoadMore = () => {
+    setSliceData(slicedata + 4);
+  };
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/datafind2")
+      .get("http://localhost:4000/api/datafind")
       .then((res) => {
         setData(res.data);
       })
@@ -18,60 +20,8 @@ const OnePlus = () => {
 
   return (
     <>
-      <div className="Welcome">Laptop And Accessories</div>
-      <div className="Product_View">
-        <Carousel
-          infiniteLoop={true}
-          useKeyboardArrows
-          autoPlay
-          interval={3000}
-          stopOnHover={false}
-          stopOnInteraction={false}
-          showStatus={false}
-          showIndicators={false}
-          showThumbs={false}
-        >
-          <div>
-            <img
-              className="slide_image"
-              src="https://img.freepik.com/free-vector/flat-design-fast-food-facebook-template_23-2149135961.jpg"
-              alt="not found"
-            />
-          </div>
-          <div>
-            <img
-              className="slide_image"
-              src="https://img.lovepik.com/desgin_photo/45004/2500_list.jpg!/fw/431"
-              alt="not found"
-              // width="100%"
-            />
-          </div>
-          <div>
-            <img
-              className="slide_image"
-              src="https://c4.wallpaperflare.com/wallpaper/261/907/766/kfc-fast-food-design-wallpaper-preview.jpg"
-              alt="not found"
-              // width="100%"
-            />
-          </div>
-          <div>
-            <img
-              className="slide_image"
-              src="https://img.freepik.com/free-vector/flat-horizontal-sale-banner-template-world-vegetarian-day-celebration_23-2150746551.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais"
-              alt="not found"
-              // width="100%"
-            />
-          </div>
-          <div>
-            <img
-              className="slide_image"
-              src="https://static.vitra.com/media-resized/d7RMUrJgu8F7qCr0T9gCW3RLJpF85dcYwJQfbEzPmM4/fill/1024/676/ce/0/aHR0cHM6Ly9zdGF0aWMudml0cmEuY29tL21lZGlhL2Fzc2V0Lzc3MjUwMTcvc3RvcmFnZS92X2Z1bGxibGVlZF8xNDQweC83ODMzMzcxOS5qcGc.jpg"
-              alt="not found"
-              // width="100%"
-            />
-          </div>
-        </Carousel>
-      </div>
+      <div className="Welcome">OnePlus & Accessories</div>
+
       <div className="maincontainer">
         <div className="sidediv">
           <Link className="sidebarLink" to="/laptop/hp">
@@ -96,6 +46,7 @@ const OnePlus = () => {
         <div className="conatiner">
           {data
             .filter((item) => item.type === "oneplus")
+            .slice(0, slicedata)
             .map((item, index) => {
               return (
                 <Link to={`/single/${item.id}`} key={index}>
@@ -122,6 +73,11 @@ const OnePlus = () => {
               );
             })}
         </div>
+      </div>
+      <div className="LoadMoreButton">
+        <button onClick={handleLoadMore} className="laptop-loadmore">
+          Load More
+        </button>
       </div>
     </>
   );

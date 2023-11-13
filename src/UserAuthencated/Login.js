@@ -1,83 +1,73 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-function LogIn() {
+import { NavLink, useNavigate } from "react-router-dom";
+function Login() {
+  const navi = useNavigate();
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
   };
-  const navigate = useNavigate();
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("https://login-ejkr.onrender.com/api/login", data)
-      .then((res) => {
-        alert(res.data.msg);
-        setData(res.data);
-        localStorage.setItem("token", res.data.token);
-        if (res.data.token) {
-          navigate("/Home");
-        } else {
-          navigate("/");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-
-    setData({
-      email: "",
-      password: "",
-    });
+    try {
+      const url = "http://localhost:4000/api/auth";
+      const { data: res } = await axios.post(url, data);
+      localStorage.setItem("token", res.data);
+      window.location = "/";
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
   };
-
   return (
-    <div className="center">
-      <h1 id="heading">Log in</h1>
-      <form className="loginform" onSubmit={handleSubmit}>
-        <label className="word" htmlFor="email">
-          Email:
-        </label>
+    <>
+      <form className="center1" onSubmit={handleSubmit}>
+        <h1 id="heading">Login to Account</h1>
+        <label id="font">Set Password: </label>
         <input
-          className="text"
+          className="text3"
           type="email"
           name="email"
-          id="email"
+          id="Password"
           onChange={handleChange}
           value={data.email}
-        />
+        ></input>
         <br />
         <br />
-        <label className="word" htmlFor="password">
-          Password:
-        </label>
+        <label id="font">Set Password: </label>
         <input
-          className="text1"
+          className="text3"
+          placeholder="Enter Password"
           type="password"
-          maxLength="8"
           name="password"
-          id="password"
+          id="Password"
           onChange={handleChange}
           value={data.password}
-        />
-        <br />
-        <br />
-        <button className="button" type="submit">
-          Submit
+        ></input>
+        <br></br>
+        <br></br>
+        {error && <div className="errormessage">{error}</div>}
+        <button className="button1" onClick={handleSubmit}>
+          SignIn
         </button>
+        <div className="or1">OR</div>
+        <NavLink to="/" className="nextpage1">
+          Signup
+        </NavLink>
       </form>
-      <div className="or">OR</div>
-
-      <NavLink to="/Register" className="nextpage">
-        please Register First
-      </NavLink>
-    </div>
+    </>
   );
 }
 
-export default LogIn;
+export default Login;

@@ -1,9 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-import AddtoCart from "../Feature/Slice";
+import Addtocart from "../Feature/Slice";
 
 export default configureStore({
   reducer: {
-    Cart: AddtoCart,
+    Cart: Addtocart,
   },
 });

@@ -10,7 +10,7 @@ function Single() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/datafind2")
+      .get("http://localhost:4000/api/datafind")
       .then((res) => setMobileData(res.data))
       .catch((err) => console.log(err));
   }, [id]);
@@ -58,7 +58,7 @@ function Single() {
                     <h2>Battery: {item.specs.battery}</h2>
                   </li>
                 </ul>
-                <button className="buttonforAll">
+                <button className="singlebuttonForAll">
                   Add Cart
                   <i class="fa-solid fa-cart-shopping"></i>
                 </button>

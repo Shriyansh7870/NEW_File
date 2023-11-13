@@ -1,13 +1,21 @@
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
 
 import { RemoveItem } from "../Redux/Feature/Slice";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 
-export default function Cart() {
-  const selector = useSelector((state) => state.Cart.cart);
-  console.log(selector);
+const Cart = () => {
   const dispatch = useDispatch();
-  const price = selector.map((item) => parseInt(item.price));
+  const [data, setData] = useState([]);
+
+  axios
+    .get("http://localhost:4000/api/getcartdata")
+    .then((res) => {
+      setData(res.data);
+    })
+    .catch((err) => console.log("found err", err));
+  const price = data.map((item) => item.price);
+
   let sum = 0;
   for (let i = 0; i < price.length; i++) {
     sum = price[i] + sum;
@@ -15,23 +23,57 @@ export default function Cart() {
 
   return (
     <div>
-      {selector.map((item, index) => {
-        return (
-          <div className="furnitureChild" key={index}>
-            <div>
-              <img className="furniture_Img" src={item.image} alt="Not Found" />
-            </div>
-            <div className="titel">{item.title}</div>
-            <div className="price">&#8377;&nbsp;{item.price}</div>
-            <button onClick={() => dispatch(RemoveItem({ id: item.id }))}>
-              REMOVE
-            </button>
-          </div>
-        );
-      })}
-      <div>
-        <span>{sum}</span>
+      <h2 className="cartConatiner">Cart</h2>
+
+      <div className="cart-content">
+        <div className="headOfcart">
+          <h4>Product</h4>
+          <h4>Title</h4>
+          <h4>Price</h4>
+        </div>
+
+        <div>
+          {data &&
+            data.map((item, index) => {
+              const {
+                id = item.id,
+                image = item.image,
+                model = item.model,
+              } = item;
+              // const { id = item.id } = item;
+              return (
+                <div className="content-cart" key={index}>
+                  <h2>{item.quantity}</h2>
+
+                  <img src={item.image} alt="Loading..." />
+                  <div className="cart-subcontent">
+                    <h2>{item.heading}</h2>
+                    <button
+                      className="remove-cart"
+                      onClick={() =>
+                        dispatch(RemoveItem({ id, image, model, price }))
+                      }
+                    >
+                      Remove Cart
+                    </button>
+                  </div>
+                  <h2 className="cartprice">{"₹ " + item.price}</h2>
+                </div>
+              );
+            })}
+        </div>
+
+        <div className="total">
+          <h2>Total </h2>
+          <h1>{sum}</h1>
+        </div>
+
+        <div className="buy">
+          <button>Buy Now</button>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default Cart;

@@ -1,20 +1,50 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 function Home() {
   const [data, setData] = useState([]);
+  const [image, setImage] = useState([]);
+  const [currentImage, setCurrentImage] = useState(0);
+  const images = [
+    "https://cdn.pixabay.com/photo/2016/03/03/10/17/social-media-1233873_1280.jpg",
+    "https://www.themediaant.com/blog/wp-content/uploads/2023/01/How-to-Write-a-Newspaper-Advertisement-2.jpg",
+    "https://images.pexels.com/photos/210126/pexels-photo-210126.jpeg?cs=srgb&dl=pexels-pixabay-210126.jpg&fm=jpg",
+  ];
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/datafind2")
+      .get("http://localhost:4000/api/datafind")
       .then((res) => {
         setData(res.data);
       })
       .catch((err) => console.log(err, "error"));
   }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/imageGet")
+      .then((res) => {
+        setImage(res.data);
+      })
+      .catch((err) => console.log(err, "error"));
+  }, []);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(intervalId);
+  }, [images.length]);
+  function CustomArrow({ onClick, direction }) {
+    return (
+      <div
+        className={`custom-arrow custom-arrow-${direction}`}
+        onClick={onClick}
+      >
+        {direction === "left" ? "<" : ">"}
+      </div>
+    );
+  }
 
   return (
     <>
@@ -30,52 +60,28 @@ function Home() {
             showStatus={false}
             showIndicators={false}
             showThumbs={false}
+            renderArrowPrev={(onClickHandler, hasPrev, label) =>
+              hasPrev && (
+                <CustomArrow onClick={onClickHandler} direction="left" />
+              )
+            }
+            renderArrowNext={(onClickHandler, hasNext, label) =>
+              hasNext && (
+                <CustomArrow onClick={onClickHandler} direction="right" />
+              )
+            }
           >
-            <div>
-              <img
-                className="slide_image"
-                src="https://png.pngtree.com/thumb_back/fh260/background/20190221/ourmid/pngtree-simple-business-e-commerce-web-page-image_20833.jpg"
-                alt="not found"
-              />
-            </div>
-            <div>
-              <img
-                className="slide_image"
-                src="https://www.hostinger.in/tutorials/wp-content/uploads/sites/2/2020/06/Zulu-Longines_-homepage.png"
-                alt="not found"
-                // width="100%"
-              />
-            </div>
-            <div>
-              <img
-                className="slide_image"
-                src="https://media.designrush.com/articles/205879/conversions/Best-MOVIE-POSTERS-Designs-details.jpg"
-                alt="not found"
-                // width="100%"
-              />
-            </div>
-            <div>
-              <img
-                className="slide_image"
-                src="https://imgeng.jagran.com/images/2023/sep/Amazon%20Great%20Indian%20Festival%201695372555863.jpg"
-                alt="not found"
-                // width="100%"
-              />
-            </div>
-            <div>
-              <img
-                className="slide_image"
-                src="https://static.vitra.com/media-resized/d7RMUrJgu8F7qCr0T9gCW3RLJpF85dcYwJQfbEzPmM4/fill/1024/676/ce/0/aHR0cHM6Ly9zdGF0aWMudml0cmEuY29tL21lZGlhL2Fzc2V0Lzc3MjUwMTcvc3RvcmFnZS92X2Z1bGxibGVlZF8xNDQweC83ODMzMzcxOS5qcGc.jpg"
-                alt="not found"
-                // width="100%"
-              />
-            </div>
+            {image.map((img) => (
+              <div key={img._id}>
+                <img className="slide_image" src={img.url} alt={img.alt} />
+              </div>
+            ))}
           </Carousel>
         </div>
-        <div className="Home_best_seller">Best Seller Product</div>
+        <div className="Home_best_seller">Best Selling Product</div>
         <div className="Homeconatiner1">
           {data
-            .filter((item) => item.id % 12 === 0)
+            .filter((item) => item.id % 16 === 0)
             .map((item, index) => {
               return (
                 <Link to={`/single/${item.id}`} key={index}>
@@ -100,7 +106,7 @@ function Home() {
         </div>
 
         <div className="AdvertismentforHome">
-          <div className="Product_View">
+          {/* <div className="Product_View">
             <Carousel
               infiniteLoop={true}
               useKeyboardArrows
@@ -112,47 +118,14 @@ function Home() {
               showIndicators={false}
               showThumbs={false}
             >
-              <div>
-                <img
-                  className="slide_image"
-                  src="https://static.vecteezy.com/system/resources/thumbnails/004/299/835/small/online-shopping-on-phone-buy-sell-business-digital-web-banner-application-money-advertising-payment-ecommerce-illustration-search-free-vector.jpg"
-                  alt="not found"
-                />
-              </div>
-              <div>
-                <img
-                  className="slide_image"
-                  src="https://www.najmc.com/wp-content/uploads/2020/08/ecommerce-marketing.jpg"
-                  alt="not found"
-                  // width="100%"
-                />
-              </div>
-              <div>
-                <img
-                  className="slide_image"
-                  src="https://static.tnn.in/thumb/msid-104042456,thumbsize-53308,width-1280,height-720,resizemode-75/104042456.jpg"
-                  alt="not found"
-                  // width="100%"
-                />
-              </div>
-              <div>
-                <img
-                  className="slide_image"
-                  src="https://unbounce.com/photos/1100X400.png"
-                  alt="not found"
-                  // width="100%"
-                />
-              </div>
-              <div>
-                <img
-                  className="slide_image"
-                  src="https://www.searchenginejournal.com/wp-content/uploads/2020/04/google-shopping-basket-a-5e9daa789d724-scaled.jpg"
-                  alt="not found"
-                  // width="100%"
-                />
-              </div>
-            </Carousel>
-          </div>
+              {image.map((img) => (
+                <div key={img._id}>
+                  <img className="slide_image" src={img.url} alt={img.alt} />
+                </div>
+              ))}
+            </Carousel> */}
+          <img src={images[currentImage]} alt={`Image ${currentImage + 1}`} />
+          {/* </div> */}
         </div>
 
         <div className="sipping">

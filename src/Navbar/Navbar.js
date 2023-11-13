@@ -30,6 +30,7 @@ export default function Navbar() {
   const countItem = useSelector((state) => state.Cart.cart);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [hamburgur, sethamburgur] = useState(false);
 
   const handleSearch = async () => {
     try {
@@ -51,16 +52,24 @@ export default function Navbar() {
           </div>
 
           {/* navlinks............... */}
-          <ul className="navlink">
+          <ul className={hamburgur ? "navlink navlinkterminate" : "navlink"}>
             {/* home.................. */}
             <li>
               {" "}
-              <NavLink className="navlink-names" to="/">
+              <NavLink
+                className="navlink-names"
+                to="/"
+                onClick={() => sethamburgur(!hamburgur)}
+              >
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink className="navlink-names" to="/laptop">
+              <NavLink
+                className="navlink-names"
+                to="/laptop"
+                onClick={() => sethamburgur(!hamburgur)}
+              >
                 Laptop
               </NavLink>
 
@@ -88,7 +97,11 @@ export default function Navbar() {
             {/* electronics........... */}
 
             <li>
-              <NavLink className="navlink-names" to="/mobile">
+              <NavLink
+                className="navlink-names"
+                to="/mobile"
+                onClick={() => sethamburgur(!hamburgur)}
+              >
                 Mobile
               </NavLink>
               <ul class="submenu">
@@ -111,21 +124,33 @@ export default function Navbar() {
             </li>
             {/* grocery........... */}
             <li>
-              <NavLink className="navlink-names" to="/grocerry">
+              <NavLink
+                className="navlink-names"
+                to="/grocerry"
+                onClick={() => sethamburgur(!hamburgur)}
+              >
                 Grocery
               </NavLink>
             </li>
 
             {/* Footwear........... */}
             <li>
-              <NavLink className="navlink-names" to="/footwear">
+              <NavLink
+                className="navlink-names"
+                to="/footwear"
+                onClick={() => sethamburgur(!hamburgur)}
+              >
                 FootWear
               </NavLink>
             </li>
 
             {/* electronics........... */}
             <li>
-              <NavLink className="navlink-names" to="/clothes">
+              <NavLink
+                className="navlink-names"
+                to="/clothes"
+                onClick={() => sethamburgur(!hamburgur)}
+              >
                 Clothes
               </NavLink>
             </li>
@@ -154,13 +179,16 @@ export default function Navbar() {
             </ul>
             <div className="logo">
               <NavLink to="/cart">
-                <i className="fa-solid fa-cart-shopping"></i>{" "}
+                <i className="fa-solid fa-cart-shopping logoCart"></i>{" "}
                 <span>{countItem.length}</span>
               </NavLink>
               <NavLink to="/register">
-                <i className="fa-solid fa-user"></i>{" "}
+                <i className="fa-solid fa-user  userid"></i>{" "}
               </NavLink>
               <i className="fa-regular fa-heart"></i>
+            </div>
+            <div className="Hamburgur" onClick={() => sethamburgur(!hamburgur)}>
+              <i class="fa-solid fa-bars"></i>
             </div>
           </div>
         </div>
@@ -198,9 +226,6 @@ export default function Navbar() {
               <p>
                 To learn more about TreatWoo, I recommend visiting the website
                 directly or searching for recent Product, Clothes, or user
-                experiences related to the platform. Additionally, checking
-                social media channels, if available, may provide insights into
-                the community's feedback and interactions with the website.
               </p>
             </div>
             <div className="footer-section">
@@ -263,6 +288,40 @@ export default function Navbar() {
               <li>
                 <NavLink to="/mobile/Iphone" className="footertext">
                   Iphone
+                </NavLink>
+              </li>
+            </div>
+            <div className="footer-section">
+              <li>
+                <NavLink
+                  to="https://www.linkedin.com/in/shri7870/"
+                  className="footertext"
+                >
+                  <i class="fa-brands fa-linkedin"></i>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="https://github.com/Shriyansh7870"
+                  className="footertext"
+                >
+                  <i class="fa-brands fa-square-github"></i>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="https://mail.google.com/mail/u/0/#inbox"
+                  className="footertext"
+                >
+                  <i class="fa-solid fa-envelope"></i>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="https://www.instagram.com/shriyansh7870/"
+                  className="footertext"
+                >
+                  <i class="fa-brands fa-instagram"></i>
                 </NavLink>
               </li>
             </div>
