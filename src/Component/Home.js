@@ -124,7 +124,10 @@ function Home() {
                 </div>
               ))}
             </Carousel> */}
-          <img src={images[currentImage]} alt={`Image ${currentImage + 1}`} />
+          <img
+            src={images[currentImage]}
+            alt={`not found${currentImage + 1}`}
+          />
           {/* </div> */}
         </div>
 
