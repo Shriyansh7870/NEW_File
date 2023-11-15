@@ -121,7 +121,7 @@ border: none;
 
 .logosearchbar{
   outline: none;
-  background-color: white;
+  background-color: black;
   border:none;
   align-items: center;
   font-size: 15px;
@@ -318,8 +318,10 @@ display:none;
 .slide_image{
 width: 100%;
 overflow: hidden;
-image-resolution: 100%;
 height: 40vh;
+}
+.Carosusel{
+  height: 40vh;
 }
 .Product_View{
   display: flex;
@@ -821,11 +823,34 @@ li {
   }
   .navbar{
     display: flex;
+    width: 100%;
     flex-flow: column-reverse;
-    gap: 80px;
   }
+  .searchbar-logo{
+    display: flex;
+    flex-direction: row;
+    height: 10%;
+    width: 100%;
+  }
+  .logodiv{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .userid{
+    margin-top: 2vh;
+  margin-right: 40px;
+  font-size: 32px;
+  }
+.logoCart{
+  margin-top: 2vh;
+  margin-right: 40px;
+  font-size: 32px;
+}
   .Hamburgur{
     display: block;
+    font-size: 24px;
   }
   .title{
     display: none;
@@ -836,15 +861,25 @@ li {
   .navlink{
     display: none;
   }
+  .logo{
+    display: flex;
+    justify-content: space-around;
+  }
 .navlinkterminate{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
 }
 .navlink li:hover > .submenu{
   display:none;
   }
-
+.SingleParentConatiner {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
 .Welcome
 {
   font-size: 20px;
@@ -918,7 +953,7 @@ li {
       margin-right: 0;
       margin-bottom: 20px;
       overflow: hidden;
-      width: 94vw;
+      width: 84vw;
     }
     .textCotainer{
       padding: 0;
@@ -942,11 +977,34 @@ li {
 @media screen and (min-width:668px )and (max-width:1020px){
   .navbar{
     display: flex;
+    width: 100%;
     flex-flow: column-reverse;
-    gap: 80px;
   }
+  .searchbar-logo{
+    display: flex;
+    flex-direction: row;
+    height: 10%;
+    width: 100%;
+  }
+  .logodiv{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .userid{
+    margin-top: 2vh;
+  margin-right: 40px;
+  font-size: 38px;
+  }
+.logoCart{
+  margin-top: 2vh;
+  margin-right: 40px;
+  font-size: 38px;
+}
   .Hamburgur{
     display: block;
+    font-size: 28px;
   }
   .title{
     display: none;
@@ -957,15 +1015,20 @@ li {
   .navlink{
     display: none;
   }
+  .logo{
+    display: flex;
+    justify-content: space-around;
+  }
 .navlinkterminate{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
 }
 .navlink li:hover > .submenu{
   display:none;
   }
-
 .Welcome
 {
   font-size: 20px;
@@ -1054,9 +1117,67 @@ li {
   
 }
 @media screen and (min-width:1020px )and (max-width:1370px){
+
+
+
+  .navbar{
+    display: flex;
+    width: 100%;
+    flex-flow: column-reverse;
+  }
+  .searchbar-logo{
+    display: flex;
+    flex-direction: row;
+    height: 10%;
+    width: 100%;
+  }
+  .logodiv{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .userid{
+    margin-top: 2vh;
+  margin-right: 40px;
+  font-size: 38px;
+  }
+.logoCart{
+  margin-top: 2vh;
+  margin-right: 40px;
+  font-size: 38px;
+}
+  .Hamburgur{
+    display: block;
+    font-size: 28px;
+  }
+  .title{
+    display: none;
+  }
+  .whole-searchbar{
+    display: none;
+  }
+  .navlink{
+    display: none;
+  }
+  .logo{
+    display: flex;
+    justify-content: space-around;
+  }
+.navlinkterminate{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.navlink li:hover > .submenu{
+  display:none;
+  }
+
  .sidediv{
   display: none;
- }            
+ }           
   .child_conatiner{
     width: 46vw;
     height: 43vh;

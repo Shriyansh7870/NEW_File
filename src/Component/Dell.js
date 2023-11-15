@@ -11,7 +11,7 @@ const Dell = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/datafind")
+      .get("https://ecommercebackend-q2uy.onrender.com/api/datafind")
       .then((res) => {
         setData(res.data);
       })

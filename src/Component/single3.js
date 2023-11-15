@@ -10,7 +10,7 @@ function Single3() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/datafind")
+      .get("https://ecommercebackend-q2uy.onrender.com/api/datafind")
       .then((res) => setMobileData(res.data))
       .catch((err) => console.log(err));
   }, [id]);

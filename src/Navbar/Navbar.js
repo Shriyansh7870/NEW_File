@@ -25,24 +25,29 @@ import Single1 from "../Component/single1";
 import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { CartProvider } from "../Redux/Feature/ContextReducer";
 
 export default function Navbar() {
   const countItem = useSelector((state) => state.Cart.cart);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [hamburgur, sethamburgur] = useState(false);
-
-  const handleSearch = async () => {
+  const HandleChange = async (e) => {
+    const inputValue = e.target.value;
+    setQuery(inputValue);
     try {
-      await axios.get("http://localhost:4000/api/search").then((res) => {
-        console.log(res.data);
-        setResults(res.data);
-      });
+      await axios
+        .get(
+          `https://ecommercebackend-q2uy.onrender.com/api/datafind2?type=${query}`
+        )
+        .then((res) => {
+          console.log(res.data);
+          setResults(res.data);
+        });
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-
   return (
     <div>
       <BrowserRouter>
@@ -50,10 +55,7 @@ export default function Navbar() {
           <div className="title">
             <h1>TREAT</h1>
           </div>
-
-          {/* navlinks............... */}
           <ul className={hamburgur ? "navlink navlinkterminate" : "navlink"}>
-            {/* home.................. */}
             <li>
               {" "}
               <NavLink
@@ -92,10 +94,6 @@ export default function Navbar() {
                 </li>
               </ul>
             </li>
-            {/* acessories............ */}
-
-            {/* electronics........... */}
-
             <li>
               <NavLink
                 className="navlink-names"
@@ -122,7 +120,6 @@ export default function Navbar() {
                 </li>
               </ul>
             </li>
-            {/* grocery........... */}
             <li>
               <NavLink
                 className="navlink-names"
@@ -132,8 +129,6 @@ export default function Navbar() {
                 Grocery
               </NavLink>
             </li>
-
-            {/* Footwear........... */}
             <li>
               <NavLink
                 className="navlink-names"
@@ -143,8 +138,6 @@ export default function Navbar() {
                 FootWear
               </NavLink>
             </li>
-
-            {/* electronics........... */}
             <li>
               <NavLink
                 className="navlink-names"
@@ -164,61 +157,62 @@ export default function Navbar() {
                 className="searchbar"
                 id="searchInput"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => HandleChange(e)}
               />{" "}
-              <button className="logosearchbar" onClick={handleSearch}>
+              <button className="logosearchbar">
                 <i className="fa-solid fa-magnifying-glass"></i>
               </button>
             </div>
             <ul>
               {results.map((result) => (
-                <li key={result._id}>
-                  {result.name} - {result.description}
+                <li key={result.id}>
+                  {result.type} - {result.model}-{result.category}
                 </li>
               ))}
             </ul>
-            <div className="logo">
-              <NavLink to="/cart">
-                <i className="fa-solid fa-cart-shopping logoCart"></i>{" "}
-                <span>{countItem.length}</span>
-              </NavLink>
-              <NavLink to="/register">
-                <i className="fa-solid fa-user  userid"></i>{" "}
-              </NavLink>
-              <i className="fa-regular fa-heart"></i>
+            <div className="logodiv">
+              <div className="logo">
+                <NavLink to="/cart">
+                  <i className="fa-solid fa-cart-shopping logoCart"></i>{" "}
+                  <span>{countItem.length}</span>
+                </NavLink>
+                <NavLink to="/register">
+                  <i className="fa-solid fa-user  userid"></i>{" "}
+                </NavLink>
+              </div>
             </div>
             <div className="Hamburgur" onClick={() => sethamburgur(!hamburgur)}>
               <i class="fa-solid fa-bars"></i>
             </div>
           </div>
         </div>
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/footwear" element={<Electronic />} />
-          <Route path="/clothes" element={<Clothes />} />
-          <Route path="/grocerry" element={<Grocerry />} />
-          <Route path="/laptop" element={<Laptop />} />
-          <Route path="/laptop/hp" element={<Hp />} />
-          <Route path="/laptop/dell" element={<Asus />} />
-          <Route path="/laptop/lenovo" element={<Lenovo />} />
-          <Route path="/mobile" element={<Mobile />} />
-          <Route path="/mobile/iphone" element={<Iphone />} />
-          <Route path="/mobile/oneplus" element={<Oneplus />} />
-          <Route path="/mobile/samsung" element={<Samsung />} />
-          <Route path="/single/:id" element={<Single />} />
-          <Route path="/single2/:id" element={<Single2 />}></Route>
-          <Route path="/single1/:id" element={<Single1 />}></Route>
-          <Route path="/single3/:id" element={<Single3 />}></Route>
-          <Route path="/cart" element={<Cart />} />
-          <Route path="*" element={<Error />} />
-          <Route path="/login" element={<LogIn />}></Route>
-          <Route path="/register" element={<Register />}></Route>
-          <Route path="/contact" element={<Contact />}></Route>
-          <Route path="/support" element={<Support />}></Route>
-          <Route path="/about" element={<About />}></Route>
-        </Routes>
-
+        <CartProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/footwear" element={<Electronic />} />
+            <Route path="/clothes" element={<Clothes />} />
+            <Route path="/grocerry" element={<Grocerry />} />
+            <Route path="/laptop" element={<Laptop />} />
+            <Route path="/laptop/hp" element={<Hp />} />
+            <Route path="/laptop/dell" element={<Asus />} />
+            <Route path="/laptop/lenovo" element={<Lenovo />} />
+            <Route path="/mobile" element={<Mobile />} />
+            <Route path="/mobile/iphone" element={<Iphone />} />
+            <Route path="/mobile/oneplus" element={<Oneplus />} />
+            <Route path="/mobile/samsung" element={<Samsung />} />
+            <Route path="/single/:id" element={<Single />} />
+            <Route path="/single2/:id" element={<Single2 />}></Route>
+            <Route path="/single1/:id" element={<Single1 />}></Route>
+            <Route path="/single3/:id" element={<Single3 />}></Route>
+            <Route path="/cart" element={<Cart />} />
+            <Route path="*" element={<Error />} />
+            <Route path="/login" element={<LogIn />}></Route>
+            <Route path="/register" element={<Register />}></Route>
+            <Route path="/contact" element={<Contact />}></Route>
+            <Route path="/support" element={<Support />}></Route>
+            <Route path="/about" element={<About />}></Route>
+          </Routes>
+        </CartProvider>
         <footer className="footer">
           <div className="footer-content">
             <div className="footer-section">

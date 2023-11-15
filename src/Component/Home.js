@@ -15,7 +15,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/datafind")
+      .get("https://ecommercebackend-q2uy.onrender.com/api/datafind")
       .then((res) => {
         setData(res.data);
       })
@@ -23,7 +23,7 @@ function Home() {
   }, []);
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/imageGet")
+      .get("https://ecommercebackend-q2uy.onrender.com/api/imageGet")
       .then((res) => {
         setImage(res.data);
       })
@@ -51,6 +51,7 @@ function Home() {
       <div className="homeConatiner">
         <div className="Product_View">
           <Carousel
+            className="Carosusel"
             infiniteLoop={true}
             useKeyboardArrows
             autoPlay
@@ -106,24 +107,6 @@ function Home() {
         </div>
 
         <div className="AdvertismentforHome">
-          {/* <div className="Product_View">
-            <Carousel
-              infiniteLoop={true}
-              useKeyboardArrows
-              autoPlay
-              interval={3000}
-              stopOnHover={false}
-              stopOnInteraction={false}
-              showStatus={false}
-              showIndicators={false}
-              showThumbs={false}
-            >
-              {image.map((img) => (
-                <div key={img._id}>
-                  <img className="slide_image" src={img.url} alt={img.alt} />
-                </div>
-              ))}
-            </Carousel> */}
           <img
             src={images[currentImage]}
             alt={`not found${currentImage + 1}`}

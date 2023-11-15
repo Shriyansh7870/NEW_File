@@ -1,91 +1,105 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
+
 function Register() {
   const navi = useNavigate();
   const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
     password: "",
+    phoneNo: "",
   });
-  const [error, setError] = useState("");
 
-  const handleChange = ({ currentTarget: input }) => {
-    setData({ ...data, [input.name]: input.value });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleChange = (e) => {
     e.preventDefault();
-    try {
-      const url = "http://localhost:4000/api/users";
-      const { data: res } = await axios.post(url, data);
-      navi("/");
-      console.log(res.message);
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
-      }
-    }
+
+    setData({ ...data, [e.target.name]: e.target.value });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(data);
+    axios
+      .post("http://localhost:4000/api/register", data)
+      .then((res) => {
+        alert(res.data.message);
+        setData(res.data);
+        localStorage.getItem("token", res.data.token);
+        navi("/login");
+      })
+      .catch((err) => console.log(err));
+
+    setData({
+      name: "",
+      email: "",
+      password: "",
+      phoneNo: "",
+    });
+  };
+
   return (
     <>
-      <form className="center1" onSubmit={handleSubmit}>
+      <div className="center1">
         <h1 id="heading">Register</h1>
         <label id="font" htmlFor="name">
           Name:
         </label>
         <input
           className="text2"
-          placeholder="First Name"
-          type="email"
-          name="firstName"
-          id="firstName"
+          type="text"
+          name="name"
+          id="name"
           onChange={handleChange}
-          value={data.firstName}
-        />
+          value={data.name}
+          required
+        ></input>{" "}
         <br />
         <br />
-        <label id="font">Email: </label>
+        <label id="font" htmlFor="email">
+          Email:{" "}
+        </label>
         <input
           className="text2"
-          placeholder="Last Name"
-          type="email"
-          name="lastName"
-          id="lastName"
-          onChange={handleChange}
-          value={data.lastName}
-        />
-        <br />
-        <br />
-        <label id="font">Set Password: </label>
-        <input
-          className="text3"
           type="email"
           name="email"
           id="email"
           onChange={handleChange}
           value={data.email}
-        ></input>
+          required
+        />
         <br />
         <br />
-        <label id="font">Set Password: </label>
+        <label id="font" htmlFor="Password">
+          Set Password:{" "}
+        </label>
         <input
           className="text3"
-          placeholder="Enter Password"
           type="password"
+          maxLength="8"
           name="password"
           id="Password"
           onChange={handleChange}
           value={data.password}
+          required
         ></input>
-        <br></br>
-        <br></br>
-        {error && <div className="errormessage">{error}</div>}
+        <br />
+        <br />
+        <label id="font" htmlFor="phoneNo">
+          Phone.No:{" "}
+        </label>
+        <input
+          className="text4"
+          type="number"
+          max="10"
+          name="phoneNo"
+          id="phoneNo"
+          onChange={handleChange}
+          value={data.phoneNo}
+          required
+        ></input>{" "}
+        <br />
+        <br />
         <button className="button1" onClick={handleSubmit}>
           Submit
         </button>
@@ -93,7 +107,7 @@ function Register() {
         <NavLink to="/login" className="nextpage1">
           Go To Login Page
         </NavLink>
-      </form>
+      </div>
     </>
   );
 }

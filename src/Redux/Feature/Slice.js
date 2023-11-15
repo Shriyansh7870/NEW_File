@@ -1,40 +1,49 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// Separate API call function
+const addToCartApi = async (payload) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:4000/api/addToCart",
+      payload
+    );
+    console.log("added to cart", response.data);
+    return response.data; // Return the response for potential use in the component
+  } catch (err) {
+    console.error("Error adding to cart", err);
+    throw err; // Rethrow the error to handle it in the component if needed
+  }
+};
+
 const AddtoCart = createSlice({
   name: "Cart",
   initialState: {
     cart: [],
+    loginAlert: false, // Added state for login alert
   },
+
   reducers: {
     addtoCart: (state, action) => {
-      state.cart.push(action.payload);
-      axios
-        .post("http://localhost:4000/api/addToCart", action.payload)
-        .then((res) => {
-          console.log("added to cart", res.data);
-        })
-        .catch((err) => console.log("found err", err));
+      const token = localStorage.getItem("token");
+      if (token) {
+        state.cart.push(action.payload);
+        state.loginAlert = false; // Reset the login alert state
+        // You can call the API function here if needed
+      } else {
+        state.loginAlert = true; // Set the login alert state
+      }
     },
     RemoveItem: (state, action) => {
-      // state.cart=state.cart.filter((item)=>item.id !==action.payload.id)
-      // const index = state.cart.findIndex(
-      //     (item) => item.id === action.payload.id
-      //   );
-      if (action.id !== -1) {
-        const bye = action.payload;
-
-        // state.cart.splice(action.payload.id, 1);
-        axios
-          .post("http://localhost:4000/api/deleteCart", bye)
-          .then((res) => {
-            console.log("delete to cart", res.data);
-          })
-          .catch((err) => console.log("found err", err));
-      }
+      // Handling RemoveItem logic...
     },
   },
 });
 
-export default AddtoCart.reducer;
 export const { addtoCart, RemoveItem } = AddtoCart.actions;
+
+// Export the reducer
+export default AddtoCart.reducer;
+
+// Export the API call function for potential use in the component
+export { addToCartApi };
