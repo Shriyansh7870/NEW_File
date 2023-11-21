@@ -1,16 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { addtoCart } from "../Redux/Slice";
+import { useDispatch } from "react-redux";
 function Single2() {
   const { id } = useParams();
   // const newid = parseInt(id);
   console.log(id);
   const [mobileData, setMobileData] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
-      .get("https://ecommercebackend-q2uy.onrender.com/api/datafind")
+      .get("https://ecommercebackend-q2uy.onrender.com/api/datafind2")
       .then((res) => setMobileData(res.data))
       .catch((err) => console.log(err));
   }, [id]);
@@ -21,6 +23,13 @@ function Single2() {
       {mobileData
         .filter((item) => item.id === id)
         .map((item, index) => {
+          const {
+            id = item.id,
+            image = item.image,
+            price = parseInt(item.price),
+            model = item.model,
+            quantity = item.quantity,
+          } = item;
           return (
             <div className="SingleParentConatiner">
               <div key={index} className="page_single_image">
@@ -46,7 +55,12 @@ function Single2() {
                     <h2>Packaging:{item.specs.Packaging}</h2>
                   </li>
                 </ul>
-                <button className="buttonforAll">
+                <button
+                  className="buttonforAll"
+                  onClick={() =>
+                    dispatch(addtoCart({ id, image, price, quantity, model }))
+                  }
+                >
                   Add Cart
                   <i class="fa-solid fa-cart-shopping"></i>
                 </button>

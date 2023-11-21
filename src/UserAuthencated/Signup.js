@@ -21,11 +21,9 @@ function Register() {
     e.preventDefault();
     console.log(data);
     axios
-      .post("http://localhost:4000/api/register", data)
+      .post("https://ecommercebackend-q2uy.onrender.com/api/register", data)
       .then((res) => {
-        alert(res.data.message);
-        setData(res.data);
-        localStorage.getItem("token", res.data.token);
+        alert(res.data.msg);
         navi("/login");
       })
       .catch((err) => console.log(err));

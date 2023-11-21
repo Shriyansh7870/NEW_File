@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addtoCart } from "../Redux/Feature/Slice";
+import { addtoCart } from "../Redux/Slice";
 const Laptop = () => {
   const [data, setData] = useState([]);
+
   const dispatch = useDispatch();
   const [slicedata, setSliceData] = useState(8);
   const handleLoadMore = () => {
@@ -13,14 +14,13 @@ const Laptop = () => {
 
   useEffect(() => {
     axios
-      .get("https://ecommercebackend-q2uy.onrender.com/api/datafind")
+      .get("https://ecommercebackend-q2uy.onrender.com/api/datafind2")
       .then((res) => {
         console.log(res.data);
         setData(res.data);
       })
       .catch((err) => console.log(err, "error"));
   }, []);
-
   return (
     <>
       <div className="Welcome">Laptop And Accessories</div>
@@ -47,9 +47,6 @@ const Laptop = () => {
           </Link>
         </div>
         <div className="LaptopContainer2">
-          {/* {data
-            .filter((item) => item.category === "laptop")
-            .map((item, index) => { */}
           {data
             .filter((item) => item.category === "laptop")
             .slice(0, slicedata)

@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { addtoCart } from "../Redux/Slice";
 const Hp = () => {
   const [data, setData] = useState([]);
   const [slicedata, setSliceData] = useState(8);
+  const dispatch = useDispatch();
   const handleLoadMore = () => {
     setSliceData(slicedata + 4);
   };
 
   useEffect(() => {
     axios
-      .get("https://ecommercebackend-q2uy.onrender.com/api/datafind")
+      .get("https://ecommercebackend-q2uy.onrender.com/api/datafind2")
       .then((res) => {
         setData(res.data);
       })
@@ -47,28 +49,40 @@ const Hp = () => {
             .filter((item) => item.type === "hp")
             .slice(0, slicedata)
             .map((item, index) => {
+              const {
+                id = item.id,
+                image = item.image,
+                price = parseInt(item.price),
+                model = item.model,
+                quantity = item.quantity,
+              } = item;
               return (
-                <Link to={`/single/${item.id}`} key={index}>
-                  <div className="child_conatiner">
-                    <div className="laptop_div">
+                <div className="child_conatiner">
+                  <div className="laptop_div">
+                    <Link to={`/single/${item.id}`} key={index}>
                       <img
                         className="Laptop_image"
                         src={item.image}
                         alt="Not Found"
                       />
-                    </div>
-                    <div modelName className="LaptopmodelName">
-                      {" "}
-                      {item.model}
-                    </div>
-                    <div className="Price-of-All">{item.price}</div>
-                    <button className="buttonforAll">
-                      Add Cart
-                      <i className="fa-solid fa-cart-shopping"></i>
-                    </button>
-                    <div></div>
+                    </Link>
                   </div>
-                </Link>
+                  <div modelName className="LaptopmodelName">
+                    {" "}
+                    {item.model}
+                  </div>
+                  <div className="Price-of-All">{item.price}</div>
+                  <button
+                    className="buttonforAll"
+                    onClick={() =>
+                      dispatch(addtoCart({ id, image, price, quantity, model }))
+                    }
+                  >
+                    Add Cart
+                    <i className="fa-solid fa-cart-shopping"></i>
+                  </button>
+                  <div></div>
+                </div>
               );
             })}
         </div>

@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { addtoCart } from "../Redux/Slice";
 function Single() {
   const { id } = useParams();
   // const newid = parseInt(id);
   console.log(id);
   const [mobileData, setMobileData] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -21,6 +23,13 @@ function Single() {
       {mobileData
         .filter((item) => item.id === id)
         .map((item, index) => {
+          const {
+            id = item.id,
+            image = item.image,
+            price = parseInt(item.price),
+            model = item.model,
+            quantity = item.quantity,
+          } = item;
           return (
             <div className="SingleParentConatiner">
               <div key={index} className="page_single_image">
@@ -58,7 +67,12 @@ function Single() {
                     <h2>Battery: {item.specs.battery}</h2>
                   </li>
                 </ul>
-                <button className="singlebuttonForAll">
+                <button
+                  className="singlebuttonForAll"
+                  onClick={() =>
+                    dispatch(addtoCart({ id, image, price, quantity, model }))
+                  }
+                >
                   Add Cart
                   <i class="fa-solid fa-cart-shopping"></i>
                 </button>

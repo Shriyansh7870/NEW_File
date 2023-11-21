@@ -3,10 +3,13 @@ import { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { addtoCart } from "../Redux/Slice";
+import { useDispatch } from "react-redux";
 function Home() {
   const [data, setData] = useState([]);
   const [image, setImage] = useState([]);
   const [currentImage, setCurrentImage] = useState(0);
+  const dispatch = useDispatch();
   const images = [
     "https://cdn.pixabay.com/photo/2016/03/03/10/17/social-media-1233873_1280.jpg",
     "https://www.themediaant.com/blog/wp-content/uploads/2023/01/How-to-Write-a-Newspaper-Advertisement-2.jpg",
@@ -15,7 +18,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("https://ecommercebackend-q2uy.onrender.com/api/datafind")
+      .get("https://ecommercebackend-q2uy.onrender.com/api/datafind2")
       .then((res) => {
         setData(res.data);
       })
@@ -84,24 +87,38 @@ function Home() {
           {data
             .filter((item) => item.id % 16 === 0)
             .map((item, index) => {
+              const {
+                id = item.id,
+                image = item.image,
+                price = parseInt(item.price),
+                model = item.model,
+                quantity = item.quantity,
+              } = item;
               return (
-                <Link to={`/single/${item.id}`} key={index}>
-                  <div className="HomeChild">
-                    <div key={index}>
+                <div className="HomeChild">
+                  <div key={index}>
+                    <Link to={`/single/${item.id}`} key={index}>
                       <img
                         className="Home_image"
                         src={item.image}
                         alt="Not Found"
                       />
-                      <div className="HomemodelName"> {item.model}</div>
-                      <div className="LaptopPrice-of-All">{item.price}</div>
-                      <button className="buttonforAll">
-                        Add Cart
-                        <i class="fa-solid fa-cart-shopping"></i>
-                      </button>
-                    </div>
+                    </Link>
+                    <div className="HomemodelName"> {item.model}</div>
+                    <div className="LaptopPrice-of-All">{item.price}</div>
+                    <button
+                      className="buttonforAll"
+                      onClick={() =>
+                        dispatch(
+                          addtoCart({ id, image, price, quantity, model })
+                        )
+                      }
+                    >
+                      Add Cart
+                      <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
                   </div>
-                </Link>
+                </div>
               );
             })}
         </div>

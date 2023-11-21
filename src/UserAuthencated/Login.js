@@ -15,11 +15,12 @@ function LogIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/api/login", data)
+      .post("https://ecommercebackend-q2uy.onrender.com/api/login", data)
       .then((res) => {
-        alert(res.data.message);
-        setData(res.data);
+        alert(res.data.msg);
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("name", res.data.name);
+        console.log(res.data);
         if (res.data.token) {
           navigate("/");
         } else {
