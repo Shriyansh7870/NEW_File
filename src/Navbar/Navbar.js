@@ -61,7 +61,7 @@ export default function Navbar() {
         button: "Login",
       });
     }
-  }, [token, navigate]);
+  }, [token, navigate, userName]);
 
   const HandleChange = async (e) => {
     const inputValue = e.target.value;

@@ -1,19 +1,11 @@
 import React from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 const PlaceOrder = () => {
   const location = useLocation();
-
-  const navi = useNavigate();
 
   const total = location.state.reduce((acc, item) => {
     return acc + item.price * item.quantity;
   }, 0);
-
-  //   const handleClick = (e) => {
-  //     e.preventDefault();
-  //     navi("/buy");
-  //   };
-
   return (
     <>
       <h1 className="checkout">CheckOut</h1>
