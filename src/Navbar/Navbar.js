@@ -29,6 +29,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import PlaceOrder from "../Component/PlaceOrder";
 import FinalMessage from "../Component/FinalMessage";
+import Cancel from "../Component/cancel";
 
 export default function Navbar() {
   const countItem = useSelector((state) => state.Cart.cart);
@@ -253,6 +254,7 @@ export default function Navbar() {
         <Route path="/searchresult" element={<SearchResults />}></Route>
         <Route path="/Placeorder" element={<PlaceOrder />}></Route>
         <Route path="/finalMessage" element={<FinalMessage />}></Route>
+        <Route path="/cancel" element={<Cancel />}></Route>
       </Routes>
 
       <footer className="footer">

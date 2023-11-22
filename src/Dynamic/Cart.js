@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RemoveItem, IncreaseQuantity, DecreaseQuantity } from "../Redux/Slice";
-import { NavLink } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -22,6 +22,34 @@ const Cart = () => {
 
   const handleRemoveItem = (id) => {
     dispatch(RemoveItem({ id }));
+  };
+  const donepayment = async () => {
+    const stripe = await loadStripe(
+      "pk_test_51OFIomSI0xtOp9M4Lx8yK0ymk7DICp3GTuxeSCzdqrXq848U4YfGuir1l5NIU5NYyrgKk0vgYSQ6eF7OLBPHEYFJ00agxvY8do"
+    );
+
+    const body = {
+      products: data,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const response = await fetch(
+      "https://ecommercebackend-q2uy.onrender.com/out/create-checkout-session",
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+      }
+    );
+    const session = await response.json();
+
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+    if (result.error) {
+      console.log(result.error);
+    }
   };
 
   return (
@@ -81,9 +109,7 @@ const Cart = () => {
         </div>
 
         <div className="buy">
-          <NavLink to="/Placeorder" state={data}>
-            <button>Buy Now</button>
-          </NavLink>
+          <button onClick={donepayment}>Buy Now</button>
         </div>
       </div>
     </div>
